@@ -1,0 +1,16 @@
+
+m4 timing.m4 grammar.m4 > grammar.y
+
+m4 timing.m4 input.m4 > input.lex
+
+flex -l input.lex
+
+bison -d grammar.y  (产生头文件和.c文件)
+
+bison grammar.y (只产生.c文件)
+
+
+
+
+
+

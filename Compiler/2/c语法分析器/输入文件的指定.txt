@@ -1,0 +1,58 @@
+
+
+lex.yy.c中，将下面语句注释
+
+if ( ! yyin )
+			yyin = stdin;
+
+
+
+解析之前，设置yyin为输入文件指针
+
+
+extern FILE *yyin;
+
+if(!(yyin = fopen(filename,"r"))) {
+  printf("the file not exist\n");
+  exit(0);
+}
+
+
+yyin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

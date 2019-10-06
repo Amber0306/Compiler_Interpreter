@@ -1,0 +1,5 @@
+﻿  yac.cpp
+d:\amber_project\compiler\yac\yac\yac.cpp(218): warning C4018: “<”: 有符号/无符号不匹配
+d:\amber_project\compiler\yac\yac\yac.cpp(239): warning C4101: “mode”: 未引用的局部变量
+d:\amber_project\compiler\yac\yac\yac.cpp(239): warning C4101: “hang”: 未引用的局部变量
+  yac.vcxproj -> D:\Amber_project\Compiler\yac\Debug\yac.exe

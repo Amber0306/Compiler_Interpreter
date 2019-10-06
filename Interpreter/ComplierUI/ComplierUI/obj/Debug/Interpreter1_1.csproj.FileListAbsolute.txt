@@ -1,0 +1,10 @@
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\bin\Debug\ComplierUI.exe.config
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\bin\Debug\ComplierUI.exe
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\bin\Debug\ComplierUI.pdb
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\obj\Debug\Interpreter1_1.csprojAssemblyReference.cache
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\obj\Debug\ComplierUI.Form1.resources
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\obj\Debug\ComplierUI.Properties.Resources.resources
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\obj\Debug\Interpreter1_1.csproj.GenerateResource.cache
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\obj\Debug\Interpreter1_1.csproj.CoreCompileInputs.cache
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\obj\Debug\ComplierUI.exe
+E:\Amber_project\Interpreter\ComplierUI\ComplierUI\obj\Debug\ComplierUI.pdb

@@ -1,0 +1,18 @@
+#include <stdio.h>
+main()
+{
+	int i,j;
+        i = 2;
+        j = 3;
+        if(i<j)
+	{
+	    i = i +1;
+	}
+        else
+	{
+	   j = j * 2;
+        }
+
+	cout(i);
+        cout(j);
+}

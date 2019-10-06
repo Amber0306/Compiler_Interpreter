@@ -1,0 +1,36 @@
+G->EF
+E->id 标识符=num;E|~
+F->AF|~
+A->标识符=表达式；A|if(条件表达式){F}else{F}A|printf(字符串)；A|~
+
+G->EF
+E->int id=number;E
+E->~
+F->AF
+F->~
+A->id=id;A
+A->id=number;A
+A->if(C){F}else{F}A
+A->printf("D")A
+A->~
+B->[id|number][+|-|*|/][id|number]
+C->id>number
+C->id<number
+C->id==number
+C->id!=number
+D->idD
+D->~
+
+G->EA
+E->i d=n;E
+E->~
+A->d=d;A
+A->d=n;A
+A->p("D")A
+A->~
+C->d>n
+C->d<n
+C->d==n
+C->d!=n
+D->dD
+D->~

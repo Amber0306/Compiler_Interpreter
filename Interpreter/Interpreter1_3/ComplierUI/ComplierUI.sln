@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interpreter1_1", "ComplierUI\Interpreter1_1.csproj", "{FF7973C9-0BE0-45E6-B319-7E0B7E919B60}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{AB3341F4-7E77-47EB-AE4C-65D933DFE796}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF7973C9-0BE0-45E6-B319-7E0B7E919B60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF7973C9-0BE0-45E6-B319-7E0B7E919B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF7973C9-0BE0-45E6-B319-7E0B7E919B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF7973C9-0BE0-45E6-B319-7E0B7E919B60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB3341F4-7E77-47EB-AE4C-65D933DFE796}.Debug|Any CPU.ActiveCfg = Debug
+		{AB3341F4-7E77-47EB-AE4C-65D933DFE796}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B723FC35-A145-4F7D-A198-F41962E564FB}
+	EndGlobalSection
+EndGlobal

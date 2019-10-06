@@ -1,0 +1,5 @@
+function aaa()
+	begin 
+		def temp3 as int;
+	end
+end function

@@ -1,0 +1,25 @@
+#include <stdio.h>
+main1()
+{
+	int i,j;
+        i = 2
+        j = 3;
+	while(i<j){}
+        int i ; 
+	printf(j);
+        if(i<j)
+	{
+		j = j - 1;
+	}
+        else   
+	{
+		i = j;
+	}
+        else
+	{
+		i = i -1;
+	}
+        i = 9;       
+	cout(i);
+        cout(j);
+}

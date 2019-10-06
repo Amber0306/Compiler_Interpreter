@@ -1,0 +1,1 @@
+function aaa ( ) begin def a as integer; a=0 ; output a; end end function

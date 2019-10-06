@@ -1,0 +1,209 @@
+(1)	decls -> e
+(2)	type -> int
+(3)	decl -> type i;
+(4)	decls -> decls decl
+(5)	type -> int
+(6)	decl -> type j;
+(7)	decls -> decls decl
+(8)	type -> float
+(9)	decl -> type v;
+(10)	decls -> decls decl
+(11)	type -> float
+(12)	decl -> type x;
+(13)	decls -> decls decl
+(14)	type -> float
+(15)	type -> type[num]
+(16)	decl -> type a;
+(17)	decls -> decls decl
+(18)	stmts -> e
+(19)	factor -> true
+(20)	unary -> factor
+(21)	term -> unary
+(22)	expr -> term
+(23)	rel -> expr
+(24)	equality -> rel
+(25)	join -> equality
+(26)	bool -> join
+(27)	decls -> e
+(28)	stmts -> e
+(29)	loc -> i
+(30)	loc -> i
+(31)	factor -> loc
+(32)	unary -> factor
+(33)	term -> unary
+(34)	expr -> term
+(35)	factor -> 1.000000
+(36)	unary -> factor
+(37)	term -> unary
+(38)	expr -> expr + term
+(39)	rel -> expr
+(40)	equality -> rel
+(41)	join -> equality
+(42)	bool -> join
+(43)	stmt -> loc = bool;
+(44)	loc -> a
+(45)	loc -> i
+(46)	factor -> loc
+(47)	unary -> factor
+(48)	term -> unary
+(49)	expr -> term
+(50)	rel -> expr
+(51)	equality -> rel
+(52)	join -> equality
+(53)	bool -> join
+(54)	loc -> loc [bool]
+(55)	factor -> loc
+(56)	unary -> factor
+(57)	term -> unary
+(58)	expr -> term
+(59)	loc -> v
+(60)	factor -> loc
+(61)	unary -> factor
+(62)	term -> unary
+(63)	expr -> term
+(64)	rel -> expr < expr
+(65)	equality -> rel
+(66)	join -> equality
+(67)	bool -> join
+(68)	stmt -> do stmt while (bool);
+(69)	stmts -> stmts stmt
+(70)	loc -> j
+(71)	loc -> j
+(72)	factor -> loc
+(73)	unary -> factor
+(74)	term -> unary
+(75)	expr -> term
+(76)	factor -> 1.000000
+(77)	unary -> factor
+(78)	term -> unary
+(79)	expr -> expr - term
+(80)	rel -> expr
+(81)	equality -> rel
+(82)	join -> equality
+(83)	bool -> join
+(84)	stmt -> loc = bool;
+(85)	loc -> a
+(86)	loc -> j
+(87)	factor -> loc
+(88)	unary -> factor
+(89)	term -> unary
+(90)	expr -> term
+(91)	rel -> expr
+(92)	equality -> rel
+(93)	join -> equality
+(94)	bool -> join
+(95)	loc -> loc [bool]
+(96)	factor -> loc
+(97)	unary -> factor
+(98)	term -> unary
+(99)	expr -> term
+(100)	loc -> v
+(101)	factor -> loc
+(102)	unary -> factor
+(103)	term -> unary
+(104)	expr -> term
+(105)	rel -> expr > expr
+(106)	equality -> rel
+(107)	join -> equality
+(108)	bool -> join
+(109)	stmt -> do stmt while (bool);
+(110)	stmts -> stmts stmt
+(111)	loc -> i
+(112)	factor -> loc
+(113)	unary -> factor
+(114)	term -> unary
+(115)	expr -> term
+(116)	loc -> j
+(117)	factor -> loc
+(118)	unary -> factor
+(119)	term -> unary
+(120)	expr -> term
+(121)	rel -> expr >= expr
+(122)	equality -> rel
+(123)	join -> equality
+(124)	bool -> join
+(125)	stmt -> break;
+(126)	stmt -> if (bool) stmt
+(127)	stmts -> stmts stmt
+(128)	loc -> x
+(129)	loc -> a
+(130)	loc -> i
+(131)	factor -> loc
+(132)	unary -> factor
+(133)	term -> unary
+(134)	expr -> term
+(135)	rel -> expr
+(136)	equality -> rel
+(137)	join -> equality
+(138)	bool -> join
+(139)	loc -> loc [bool]
+(140)	factor -> loc
+(141)	unary -> factor
+(142)	term -> unary
+(143)	expr -> term
+(144)	rel -> expr
+(145)	equality -> rel
+(146)	join -> equality
+(147)	bool -> join
+(148)	stmt -> loc = bool;
+(149)	stmts -> stmts stmt
+(150)	loc -> a
+(151)	loc -> i
+(152)	factor -> loc
+(153)	unary -> factor
+(154)	term -> unary
+(155)	expr -> term
+(156)	rel -> expr
+(157)	equality -> rel
+(158)	join -> equality
+(159)	bool -> join
+(160)	loc -> loc [bool]
+(161)	loc -> a
+(162)	loc -> j
+(163)	factor -> loc
+(164)	unary -> factor
+(165)	term -> unary
+(166)	expr -> term
+(167)	rel -> expr
+(168)	equality -> rel
+(169)	join -> equality
+(170)	bool -> join
+(171)	loc -> loc [bool]
+(172)	factor -> loc
+(173)	unary -> factor
+(174)	term -> unary
+(175)	expr -> term
+(176)	rel -> expr
+(177)	equality -> rel
+(178)	join -> equality
+(179)	bool -> join
+(180)	stmt -> loc = bool;
+(181)	stmts -> stmts stmt
+(182)	loc -> a
+(183)	loc -> j
+(184)	factor -> loc
+(185)	unary -> factor
+(186)	term -> unary
+(187)	expr -> term
+(188)	rel -> expr
+(189)	equality -> rel
+(190)	join -> equality
+(191)	bool -> join
+(192)	loc -> loc [bool]
+(193)	loc -> x
+(194)	factor -> loc
+(195)	unary -> factor
+(196)	term -> unary
+(197)	expr -> term
+(198)	rel -> expr
+(199)	equality -> rel
+(200)	join -> equality
+(201)	bool -> join
+(202)	stmt -> loc = bool;
+(203)	stmts -> stmts stmt
+(204)	block -> decls stmts
+(205)	stmt -> block
+(206)	stmt -> while (bool) stmt
+(207)	stmts -> stmts stmt
+(208)	block -> decls stmts
+(209)	program -> block

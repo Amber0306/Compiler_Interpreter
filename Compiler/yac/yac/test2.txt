@@ -1,0 +1,19 @@
+function aaa ( ) 
+begin 
+	a=0 ; 
+	output a; 
+	def b as float;
+	def c as float;
+	c=b;
+	
+	if b>=c 
+		begin 
+			b=b+1
+		end
+	else
+		begin 
+			c=c+1;
+		end
+	
+end 
+end function

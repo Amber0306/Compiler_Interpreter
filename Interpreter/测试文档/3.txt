@@ -1,0 +1,7 @@
+void  function(){
+/*jfgjldkjalkfg挨个看
+*/
+int u;
+u=8/4;
+
+}

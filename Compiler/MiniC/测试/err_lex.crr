@@ -1,0 +1,10 @@
+#include <stdio.h>
+main()
+{
+	bool i = 0;  
+        bool j = 1;
+        int 3id;
+        int c[4];
+        if(i|j)
+            cout(i);      
+}

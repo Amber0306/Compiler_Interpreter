@@ -1,0 +1,25 @@
+#include <stdio.h>
+main()
+{
+ int i,j,k;
+
+ i = 8;
+ j = 3;
+ k = 6;
+ 
+ while(i>0)
+{
+   j = j + i;
+   if(k>0)
+	k=k-1;
+   else
+	k = 2;
+   i = i - 1;
+
+}
+
+cout(i);
+cout(j);
+cout(k);
+ 
+}

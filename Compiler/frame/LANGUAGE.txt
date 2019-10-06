@@ -1,0 +1,56 @@
+结构体 S
+结构体声明 C
+变量们 V
+变量 Y
+标识符I
+类型T
+变量值A
+数字n
+标识符i
+类型 int t ; double d; float f;long l;struct s;
+S->C{V};
+V->YV
+V->~
+C->sI
+Y->TIA
+T->t
+T->d
+T->f
+T->l
+I->i
+A->n
+
+
+算式E
+运算符M
+//赋值语句
+G->I=E
+E->IMd
+E->dMd
+M->+
+M->-
+M->*
+M->/
+
+//汇总
+Z->G
+Z->S
+S->CV
+V->YV
+V->~
+C->sI
+Y->TIA
+T->t
+T->d
+T->f
+T->l
+I->i
+A->n
+G->I=E
+E->IMd
+E->dMd
+M->+
+M->-
+M->*
+M->/
+

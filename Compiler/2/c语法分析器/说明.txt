@@ -1,0 +1,102 @@
+
+cgrammar-new.y
+
+conditional_expression
+	: cast_expression
+	| conditional_expression '?' expression ':' conditional_expression
+
+
+此处引起移近规约冲突，改为如下，则可
+
+conditional_expression
+	: logical_expression 
+	| logical_expression '?' expression ':' conditional_expression
+
+
+解决方法2
+
+定义优先级
+%left '?'
+%left ':'
+
+
+解决方法3
+
+定义优先级
+%left '?'
+%left COLON
+
+CondExp
+	: CastExp  { $$ = $1; }
+	| CondExp '?' Exp ':' CondExp { $$ = new_node(); link($$, question_, $1, $3, $5, NULL); }  %prec COLON
+	| CondExp OR_OP CondExp	{ $$ = new_node(); link($$, or_, $1, $3, NULL);}    
+
+
+
+
+
+改成.cpp后无法调试，把所有后缀改为.c ?
+
+
+
+cgrammar-new.tab.c中如下程序段
+
+/*----------.
+| yyparse.  |
+`----------*/
+
+#ifdef YYPARSE_PARAM
+# if defined (__STDC__) || defined (__cplusplus)
+int yyparse (void *YYPARSE_PARAM)
+# else
+int yyparse (YYPARSE_PARAM)
+  void *YYPARSE_PARAM;
+# endif
+#else /* ! YYPARSE_PARAM */
+#if defined (__STDC__) || defined (__cplusplus)
+int
+yyparse (void)
+#else
+int
+yyparse ()
+    ;
+#endif
+#endif
+
+改为
+int yyparse () 或者 int yyparse (void)
+
+
+
+comment函数调用yyinput，编译会有链接错误，解决方法一，将lex.yy.c中的yyinput函数定义拷贝一份到input.lex, 重命名为my_yyinput, 
+或者将lex.yy.c中的
+#ifdef __cplusplus
+static int yyinput()
+#else
+static int input()
+#endif
+
+改为
+static int yyinput()
+上述问题出现的情形：词法分析器的后缀名为.c, 而不是.cpp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

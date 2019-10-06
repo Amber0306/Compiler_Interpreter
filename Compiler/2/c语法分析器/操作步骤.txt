@@ -1,0 +1,101 @@
+
+
+//##############################################################################
+一，
+flex -l input.lex
+
+bison -d cgrammar-new.y  (产生头文件和.c文件)
+/////////////////////////////////////////////////////////////
+
+
+//##############################################################################
+
+comment函数调用yyinput，编译会有链接错误，解决方法一，将lex.yy.c中的yyinput函数定义拷贝一份到input.lex, 重命名为my_yyinput, 
+或者将lex.yy.c中的
+#ifdef __cplusplus
+static int yyinput()
+#else
+static int input()
+#endif
+
+改为
+static int yyinput()
+上述问题出现的情形：词法分析器的后缀名为.c, 而不是.cpp
+/////////////////////////////////////////////////////////////
+
+
+//##############################################################################
+
+cgrammar-new.tab.c中如下程序段
+
+/*----------.
+| yyparse.  |
+`----------*/
+
+#ifdef YYPARSE_PARAM
+# if defined (__STDC__) || defined (__cplusplus)
+int yyparse (void *YYPARSE_PARAM)
+# else
+int yyparse (YYPARSE_PARAM)
+  void *YYPARSE_PARAM;
+# endif
+#else /* ! YYPARSE_PARAM */
+#if defined (__STDC__) || defined (__cplusplus)
+int
+yyparse (void)
+#else
+int
+yyparse ()
+    ;
+#endif
+#endif
+
+改为
+int yyparse () 或者 int yyparse (void)
+/////////////////////////////////////////////////////////////
+
+
+//##############################################################################
+四，lex.yy.c中，将下面语句注释
+if ( ! yyin )
+			yyin = stdin;
+
+/////////////////////////////////////////////////////////////
+
+
+//##############################################################################
+五，解析之前，设置yyin为输入文件指针
+
+extern FILE *yyin;
+
+if(!(yyin = fopen(filename,"r"))) {
+  printf("the file not exist\n");
+  exit(0);
+}
+/////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

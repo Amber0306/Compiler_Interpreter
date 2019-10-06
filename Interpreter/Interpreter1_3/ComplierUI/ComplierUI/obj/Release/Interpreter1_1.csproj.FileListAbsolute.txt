@@ -1,0 +1,10 @@
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\bin\Release\ComplierUI.exe.config
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\bin\Release\ComplierUI.exe
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\bin\Release\ComplierUI.pdb
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\obj\Release\Interpreter1_1.csprojAssemblyReference.cache
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\obj\Release\ComplierUI.Form1.resources
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\obj\Release\ComplierUI.Properties.Resources.resources
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\obj\Release\Interpreter1_1.csproj.GenerateResource.cache
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\obj\Release\Interpreter1_1.csproj.CoreCompileInputs.cache
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\obj\Release\ComplierUI.exe
+E:\Amber_project\Interpreter\Interpreter1_3\ComplierUI\ComplierUI\obj\Release\ComplierUI.pdb

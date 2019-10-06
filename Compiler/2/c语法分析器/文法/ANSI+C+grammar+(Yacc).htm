@@ -1,0 +1,449 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0049)http://www.lysator.liu.se/c/ANSI-C-grammar-y.html -->
+<HTML><HEAD><TITLE>ANSI C grammar (Yacc)</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK rev=made 
+href="mailto:jutta@pobox.com" rel=made>
+<META content="MSHTML 6.00.2900.6197" name=GENERATOR></HEAD>
+<BODY>
+<H1>ANSI C Yacc grammar</H1>In 1985, Jeff Lee published his Yacc grammar (which 
+is accompanied by a matching <A 
+href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html">Lex specification</A>) 
+for the April 30, 1985 draft version of the ANSI C standard.&nbsp;<TT> </TT>Tom 
+Stockfisch reposted it to net.sources in 1987; that original, as mentioned in 
+the answer to <A 
+href="http://www.lysator.liu.se/c/c-faq/c-17.html#17-25">question 17.25</A> of 
+the comp.lang.c FAQ, can be ftp'ed from ftp.uu.net, file <A 
+href="ftp://ftp.uu.net/usenet/net.sources/ansi.c.grammar.Z">usenet/net.sources/ansi.c.grammar.Z</A>. 
+
+<P><A href="mailto:jutta@pobox.com">Jutta Degener</A>, 1995 
+<P>
+<HR>
+<PRE>%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CONSTANT">CONSTANT</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#STRING-LITERAL">STRING_LITERAL</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SIZEOF">SIZEOF</A>
+%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#PTR-OP">PTR_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#INC-OP">INC_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DEC-OP">DEC_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#LEFT-OP">LEFT_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#RIGHT-OP">RIGHT_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#LE-OP">LE_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#GE-OP">GE_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#EQ-OP">EQ_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#NE-OP">NE_OP</A>
+%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#AND-OP">AND_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#OR-OP">OR_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#MUL-ASSIGN">MUL_ASSIGN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DIV-ASSIGN">DIV_ASSIGN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#MOD-ASSIGN">MOD_ASSIGN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ADD-ASSIGN">ADD_ASSIGN</A>
+%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SUB-ASSIGN">SUB_ASSIGN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#LEFT-ASSIGN">LEFT_ASSIGN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#RIGHT-ASSIGN">RIGHT_ASSIGN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#AND-ASSIGN">AND_ASSIGN</A>
+%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#XOR-ASSIGN">XOR_ASSIGN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#OR-ASSIGN">OR_ASSIGN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">TYPE_NAME</A>
+
+%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#TYPEDEF">TYPEDEF</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#EXTERN">EXTERN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#STATIC">STATIC</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#AUTO">AUTO</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#REGISTER">REGISTER</A>
+%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CHAR">CHAR</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SHORT">SHORT</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#INT">INT</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#LONG">LONG</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SIGNED">SIGNED</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#UNSIGNED">UNSIGNED</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#FLOAT">FLOAT</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DOUBLE">DOUBLE</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CONST">CONST</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#VOLATILE">VOLATILE</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#VOID">VOID</A>
+%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#STRUCT">STRUCT</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#UNION">UNION</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ENUM">ENUM</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ELLIPSIS">ELLIPSIS</A>
+
+%token <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CASE">CASE</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DEFAULT">DEFAULT</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#IF">IF</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ELSE">ELSE</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SWITCH">SWITCH</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#WHILE">WHILE</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DO">DO</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#FOR">FOR</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#GOTO">GOTO</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CONTINUE">CONTINUE</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#BREAK">BREAK</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#RETURN">RETURN</A>
+
+%start <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#translation-unit">translation_unit</A>
+%%
+
+<A name=primary-expression>primary_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CONSTANT">CONSTANT</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#STRING-LITERAL">STRING_LITERAL</A>
+	| '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ')'
+	;
+
+<A name=postfix-expression>postfix_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#primary-expression">primary_expression</A>
+	| postfix_expression '[' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ']'
+	| postfix_expression '(' ')'
+	| postfix_expression '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#argument-expression-list">argument_expression_list</A> ')'
+	| postfix_expression '.' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	| postfix_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#PTR-OP">PTR_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	| postfix_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#INC-OP">INC_OP</A>
+	| postfix_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DEC-OP">DEC_OP</A>
+	;
+
+<A name=argument-expression-list>argument_expression_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#assignment-expression">assignment_expression</A>
+	| argument_expression_list ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#assignment-expression">assignment_expression</A>
+	;
+
+<A name=unary-expression>unary_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#postfix-expression">postfix_expression</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#INC-OP">INC_OP</A> unary_expression
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DEC-OP">DEC_OP</A> unary_expression
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#unary-operator">unary_operator</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#cast-expression">cast_expression</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SIZEOF">SIZEOF</A> unary_expression
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SIZEOF">SIZEOF</A> '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-name">type_name</A> ')'
+	;
+
+<A name=unary-operator>unary_operator</A>
+	: '&amp;'
+	| '*'
+	| '+'
+	| '-'
+	| '~'
+	| '!'
+	;
+
+<A name=cast-expression>cast_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#unary-expression">unary_expression</A>
+	| '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-name">type_name</A> ')' cast_expression
+	;
+
+<A name=multiplicative-expression>multiplicative_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#cast-expression">cast_expression</A>
+	| multiplicative_expression '*' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#cast-expression">cast_expression</A>
+	| multiplicative_expression '/' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#cast-expression">cast_expression</A>
+	| multiplicative_expression '%' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#cast-expression">cast_expression</A>
+	;
+
+<A name=additive-expression>additive_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#multiplicative-expression">multiplicative_expression</A>
+	| additive_expression '+' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#multiplicative-expression">multiplicative_expression</A>
+	| additive_expression '-' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#multiplicative-expression">multiplicative_expression</A>
+	;
+
+<A name=shift-expression>shift_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#additive-expression">additive_expression</A>
+	| shift_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#LEFT-OP">LEFT_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#additive-expression">additive_expression</A>
+	| shift_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#RIGHT-OP">RIGHT_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#additive-expression">additive_expression</A>
+	;
+
+<A name=relational-expression>relational_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#shift-expression">shift_expression</A>
+	| relational_expression '&lt;' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#shift-expression">shift_expression</A>
+	| relational_expression '&gt;' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#shift-expression">shift_expression</A>
+	| relational_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#LE-OP">LE_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#shift-expression">shift_expression</A>
+	| relational_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#GE-OP">GE_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#shift-expression">shift_expression</A>
+	;
+
+<A name=equality-expression>equality_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#relational-expression">relational_expression</A>
+	| equality_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#EQ-OP">EQ_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#relational-expression">relational_expression</A>
+	| equality_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#NE-OP">NE_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#relational-expression">relational_expression</A>
+	;
+
+<A name=and-expression>and_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#equality-expression">equality_expression</A>
+	| and_expression '&amp;' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#equality-expression">equality_expression</A>
+	;
+
+<A name=exclusive-or-expression>exclusive_or_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#and-expression">and_expression</A>
+	| exclusive_or_expression '^' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#and-expression">and_expression</A>
+	;
+
+<A name=inclusive-or-expression>inclusive_or_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#exclusive-or-expression">exclusive_or_expression</A>
+	| inclusive_or_expression '|' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#exclusive-or-expression">exclusive_or_expression</A>
+	;
+
+<A name=logical-and-expression>logical_and_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#inclusive-or-expression">inclusive_or_expression</A>
+	| logical_and_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#AND-OP">AND_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#inclusive-or-expression">inclusive_or_expression</A>
+	;
+
+<A name=logical-or-expression>logical_or_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#logical-and-expression">logical_and_expression</A>
+	| logical_or_expression <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#OR-OP">OR_OP</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#logical-and-expression">logical_and_expression</A>
+	;
+
+<A name=conditional-expression>conditional_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#logical-or-expression">logical_or_expression</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#logical-or-expression">logical_or_expression</A> '?' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ':' conditional_expression
+	;
+
+<A name=assignment-expression>assignment_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#conditional-expression">conditional_expression</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#unary-expression">unary_expression</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#assignment-operator">assignment_operator</A> assignment_expression
+	;
+
+<A name=assignment-operator>assignment_operator</A>
+	: '='
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#MUL-ASSIGN">MUL_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DIV-ASSIGN">DIV_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#MOD-ASSIGN">MOD_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ADD-ASSIGN">ADD_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SUB-ASSIGN">SUB_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#LEFT-ASSIGN">LEFT_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#RIGHT-ASSIGN">RIGHT_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#AND-ASSIGN">AND_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#XOR-ASSIGN">XOR_ASSIGN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#OR-ASSIGN">OR_ASSIGN</A>
+	;
+
+<A name=expression>expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#assignment-expression">assignment_expression</A>
+	| expression ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#assignment-expression">assignment_expression</A>
+	;
+
+<A name=constant-expression>constant_expression</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#conditional-expression">conditional_expression</A>
+	;
+
+<A name=declaration>declaration</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-specifiers">declaration_specifiers</A> ';'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-specifiers">declaration_specifiers</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#init-declarator-list">init_declarator_list</A> ';'
+	;
+
+<A name=declaration-specifiers>declaration_specifiers</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#storage-class-specifier">storage_class_specifier</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#storage-class-specifier">storage_class_specifier</A> declaration_specifiers
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-specifier">type_specifier</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-specifier">type_specifier</A> declaration_specifiers
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-qualifier">type_qualifier</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-qualifier">type_qualifier</A> declaration_specifiers
+	;
+
+<A name=init-declarator-list>init_declarator_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#init-declarator">init_declarator</A>
+	| init_declarator_list ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#init-declarator">init_declarator</A>
+	;
+
+<A name=init-declarator>init_declarator</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A> '=' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#initializer">initializer</A>
+	;
+
+<A name=storage-class-specifier>storage_class_specifier</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#TYPEDEF">TYPEDEF</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#EXTERN">EXTERN</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#STATIC">STATIC</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#AUTO">AUTO</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#REGISTER">REGISTER</A>
+	;
+
+<A name=type-specifier>type_specifier</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#VOID">VOID</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CHAR">CHAR</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SHORT">SHORT</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#INT">INT</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#LONG">LONG</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#FLOAT">FLOAT</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DOUBLE">DOUBLE</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SIGNED">SIGNED</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#UNSIGNED">UNSIGNED</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-or-union-specifier">struct_or_union_specifier</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#enum-specifier">enum_specifier</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">TYPE_NAME</A>
+	;
+
+<A name=struct-or-union-specifier>struct_or_union_specifier</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-or-union">struct_or_union</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A> '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-declaration-list">struct_declaration_list</A> '}'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-or-union">struct_or_union</A> '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-declaration-list">struct_declaration_list</A> '}'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-or-union">struct_or_union</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	;
+
+<A name=struct-or-union>struct_or_union</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#STRUCT">STRUCT</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#UNION">UNION</A>
+	;
+
+<A name=struct-declaration-list>struct_declaration_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-declaration">struct_declaration</A>
+	| struct_declaration_list <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-declaration">struct_declaration</A>
+	;
+
+<A name=struct-declaration>struct_declaration</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#specifier-qualifier-list">specifier_qualifier_list</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-declarator-list">struct_declarator_list</A> ';'
+	;
+
+<A name=specifier-qualifier-list>specifier_qualifier_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-specifier">type_specifier</A> specifier_qualifier_list
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-specifier">type_specifier</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-qualifier">type_qualifier</A> specifier_qualifier_list
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-qualifier">type_qualifier</A>
+	;
+
+<A name=struct-declarator-list>struct_declarator_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-declarator">struct_declarator</A>
+	| struct_declarator_list ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#struct-declarator">struct_declarator</A>
+	;
+
+<A name=struct-declarator>struct_declarator</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A>
+	| ':' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#constant-expression">constant_expression</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A> ':' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#constant-expression">constant_expression</A>
+	;
+
+<A name=enum-specifier>enum_specifier</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ENUM">ENUM</A> '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#enumerator-list">enumerator_list</A> '}'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ENUM">ENUM</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A> '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#enumerator-list">enumerator_list</A> '}'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ENUM">ENUM</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	;
+
+<A name=enumerator-list>enumerator_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#enumerator">enumerator</A>
+	| enumerator_list ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#enumerator">enumerator</A>
+	;
+
+<A name=enumerator>enumerator</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A> '=' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#constant-expression">constant_expression</A>
+	;
+
+<A name=type-qualifier>type_qualifier</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CONST">CONST</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#VOLATILE">VOLATILE</A>
+	;
+
+<A name=declarator>declarator</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#pointer">pointer</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#direct-declarator">direct_declarator</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#direct-declarator">direct_declarator</A>
+	;
+
+<A name=direct-declarator>direct_declarator</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	| '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A> ')'
+	| direct_declarator '[' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#constant-expression">constant_expression</A> ']'
+	| direct_declarator '[' ']'
+	| direct_declarator '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#parameter-type-list">parameter_type_list</A> ')'
+	| direct_declarator '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#identifier-list">identifier_list</A> ')'
+	| direct_declarator '(' ')'
+	;
+
+<A name=pointer>pointer</A>
+	: '*'
+	| '*' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-qualifier-list">type_qualifier_list</A>
+	| '*' pointer
+	| '*' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-qualifier-list">type_qualifier_list</A> pointer
+	;
+
+<A name=type-qualifier-list>type_qualifier_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-qualifier">type_qualifier</A>
+	| type_qualifier_list <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#type-qualifier">type_qualifier</A>
+	;
+
+
+<A name=parameter-type-list>parameter_type_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#parameter-list">parameter_list</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#parameter-list">parameter_list</A> ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ELLIPSIS">ELLIPSIS</A>
+	;
+
+<A name=parameter-list>parameter_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#parameter-declaration">parameter_declaration</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#parameter-list">parameter_list</A> ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#parameter-declaration">parameter_declaration</A>
+	;
+
+<A name=parameter-declaration>parameter_declaration</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-specifiers">declaration_specifiers</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-specifiers">declaration_specifiers</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#abstract-declarator">abstract_declarator</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-specifiers">declaration_specifiers</A>
+	;
+
+<A name=identifier-list>identifier_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	| identifier_list ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A>
+	;
+
+<A name=type-name>type_name</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#specifier-qualifier-list">specifier_qualifier_list</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#specifier-qualifier-list">specifier_qualifier_list</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#abstract-declarator">abstract_declarator</A>
+	;
+
+<A name=abstract-declarator>abstract_declarator</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#pointer">pointer</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#direct-abstract-declarator">direct_abstract_declarator</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#pointer">pointer</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#direct-abstract-declarator">direct_abstract_declarator</A>
+	;
+
+<A name=direct-abstract-declarator>direct_abstract_declarator</A>
+	: '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#abstract-declarator">abstract_declarator</A> ')'
+	| '[' ']'
+	| '[' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#constant-expression">constant_expression</A> ']'
+	| direct_abstract_declarator '[' ']'
+	| direct_abstract_declarator '[' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#constant-expression">constant_expression</A> ']'
+	| '(' ')'
+	| '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#parameter-type-list">parameter_type_list</A> ')'
+	| direct_abstract_declarator '(' ')'
+	| direct_abstract_declarator '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#parameter-type-list">parameter_type_list</A> ')'
+	;
+
+<A name=initializer>initializer</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#assignment-expression">assignment_expression</A>
+	| '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#initializer-list">initializer_list</A> '}'
+	| '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#initializer-list">initializer_list</A> ',' '}'
+	;
+
+<A name=initializer-list>initializer_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#initializer">initializer</A>
+	| initializer_list ',' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#initializer">initializer</A>
+	;
+
+<A name=statement>statement</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#labeled-statement">labeled_statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#compound-statement">compound_statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression-statement">expression_statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#selection-statement">selection_statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#iteration-statement">iteration_statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#jump-statement">jump_statement</A>
+	;
+
+<A name=labeled-statement>labeled_statement</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A> ':' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CASE">CASE</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#constant-expression">constant_expression</A> ':' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DEFAULT">DEFAULT</A> ':' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	;
+
+<A name=compound-statement>compound_statement</A>
+	: '{' '}'
+	| '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement-list">statement_list</A> '}'
+	| '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-list">declaration_list</A> '}'
+	| '{' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-list">declaration_list</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement-list">statement_list</A> '}'
+	;
+
+<A name=declaration-list>declaration_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration">declaration</A>
+	| declaration_list <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration">declaration</A>
+	;
+
+<A name=statement-list>statement_list</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	| statement_list <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	;
+
+<A name=expression-statement>expression_statement</A>
+	: ';'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ';'
+	;
+
+<A name=selection-statement>selection_statement</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#IF">IF</A> '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ')' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#IF">IF</A> '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ')' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#ELSE">ELSE</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#SWITCH">SWITCH</A> '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ')' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	;
+
+<A name=iteration-statement>iteration_statement</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#WHILE">WHILE</A> '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ')' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#DO">DO</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#WHILE">WHILE</A> '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ')' ';'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#FOR">FOR</A> '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression-statement">expression_statement</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression-statement">expression_statement</A> ')' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#FOR">FOR</A> '(' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression-statement">expression_statement</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression-statement">expression_statement</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ')' <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#statement">statement</A>
+	;
+
+<A name=jump-statement>jump_statement</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#GOTO">GOTO</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#check-type">IDENTIFIER</A> ';'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#CONTINUE">CONTINUE</A> ';'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#BREAK">BREAK</A> ';'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#RETURN">RETURN</A> ';'
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-l.html#RETURN">RETURN</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#expression">expression</A> ';'
+	;
+
+<A name=translation-unit>translation_unit</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#external-declaration">external_declaration</A>
+	| translation_unit <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#external-declaration">external_declaration</A>
+	;
+
+<A name=external-declaration>external_declaration</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#function-definition">function_definition</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration">declaration</A>
+	;
+
+<A name=function-definition>function_definition</A>
+	: <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-specifiers">declaration_specifiers</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-list">declaration_list</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#compound-statement">compound_statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-specifiers">declaration_specifiers</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#compound-statement">compound_statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declaration-list">declaration_list</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#compound-statement">compound_statement</A>
+	| <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#declarator">declarator</A> <A href="http://www.lysator.liu.se/c/ANSI-C-grammar-y.html#compound-statement">compound_statement</A>
+	;
+
+%%
+#include &lt;stdio.h&gt;
+
+extern char yytext[];
+extern int column;
+
+yyerror(s)
+char *s;
+{
+	fflush(stdout);
+	printf("\n%*s\n%*s\n", column, "^", column, s);
+}
+</PRE></BODY></HTML>

@@ -1,0 +1,4 @@
+﻿  FulTry.cpp
+d:\amber_project\compiler\cifa\fultry\fultry.cpp(151): warning C4018: “<”: 有符号/无符号不匹配
+d:\amber_project\compiler\cifa\fultry\fultry.cpp(129): warning C4101: “hang”: 未引用的局部变量
+  FulTry.vcxproj -> D:\Amber_project\Compiler\cifa\Debug\FulTry.exe
